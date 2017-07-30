@@ -1,22 +1,16 @@
 package com.bigburger.adapter;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.bigburger.R;
 import com.bigburger.databinding.AdapterSandwichBinding;
 import com.bigburger.model.Ingredient;
 import com.bigburger.model.Sandwich;
-import com.bigburger.view.SandwichDetailActivity;
 import com.bigburger.viewmodel.ItemSandwichViewModel;
-import com.bumptech.glide.Glide;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -124,11 +118,6 @@ public class SandwichAdapter extends RecyclerView.Adapter<SandwichAdapter.Sandwi
             } else {
                 mAdapterSandwichBinding.getSandwich().setSandwich(sandwich);
             }
-
-            Glide.with(itemView.getContext())
-                    .load(sandwich.getImage())
-                    .asBitmap()
-                    .into(mAdapterSandwichBinding.mSandwichImage);
         }
     }
 

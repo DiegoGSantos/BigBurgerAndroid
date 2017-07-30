@@ -35,8 +35,9 @@ public class ItemSandwichViewModel extends BaseObservable {
         mIngredients = ingredients;
     }
 
-    @BindingAdapter("bind:imageUrl") public static void setImageUrl(ImageView imageView, String url) {
-        Glide.with(imageView.getContext()).load(url).into(imageView);
+    @BindingAdapter({"sandwichUrl"})
+    public static void loadImage(ImageView view, String sandwichUrl) {
+        Glide.with(view.getContext()).load(sandwichUrl).into(view);
     }
 
     public void onItemClick(View view) {

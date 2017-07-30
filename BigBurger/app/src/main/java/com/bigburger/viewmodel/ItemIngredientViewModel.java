@@ -35,10 +35,6 @@ public class ItemIngredientViewModel extends BaseObservable {
         this.mIngredient = ingredient;
     }
 
-    @BindingAdapter("bind:imageUrl") public static void setImageUrl(ImageView imageView, String url) {
-        Glide.with(imageView.getContext()).load(url).into(imageView);
-    }
-
     public void setIngredient(Ingredient ingredient) {
         this.mIngredient = ingredient;
         notifyChange();

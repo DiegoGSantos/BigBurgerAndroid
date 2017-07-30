@@ -34,7 +34,8 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="@dimen/centi_margin"
             android:layout_marginBottom="@dimen/kilo_margin"
-            android:layout_marginTop="@dimen/kilo_margin"/>
+            android:layout_marginTop="@dimen/kilo_margin"
+            tools:sandwichUrl="@{sandwich.image}"/>
 
         <com.bigburger.customViews.BigBurgerTextView
             android:id="@+id/price"

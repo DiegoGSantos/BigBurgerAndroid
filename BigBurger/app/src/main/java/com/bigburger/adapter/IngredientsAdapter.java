@@ -65,11 +65,6 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
             } else {
                 mAdapterIngredientBinding.getIngredient().setIngredient(ingredient);
             }
-
-            Glide.with(itemView.getContext())
-                    .load(ingredient.getImage())
-                    .asBitmap()
-                    .into(mAdapterIngredientBinding.mIngredientImage);
         }
     }
 

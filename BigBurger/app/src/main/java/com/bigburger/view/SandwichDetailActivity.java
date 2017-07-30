@@ -36,11 +36,6 @@ public class SandwichDetailActivity extends AppCompatActivity {
 
         binding.mSandwich.setSandwich(itemSandwichViewModel);
 
-        Glide.with(this)
-                .load(mSandwich.getSandwich().getImage())
-                .asBitmap()
-                .into(binding.mSandwich.mSandwichImage);
-
         binding.mIngredientList.setAdapter(new IngredientsAdapter(mSandwich.getIngredients()));
 
         binding.toolbarTitle.setText(mSandwich.getSandwich().getName());
