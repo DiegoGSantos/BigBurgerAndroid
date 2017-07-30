@@ -6,79 +6,57 @@
     <data>
 
         <variable
-            name="sandwich"
-            type="com.bigburger.viewmodel.ItemSandwichViewModel"/>
+            name="ingredient"
+            type="com.bigburger.viewmodel.ItemIngredientViewModel"/>
 
     </data>
 
     <android.support.constraint.ConstraintLayout
-        android:onClick="@{sandwich::onItemClick}"
-        android:background="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
         android:id="@+id/clMainLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/deci_margin"
         android:paddingRight="@dimen/deci_margin"
-        android:transitionName="@string/transition_coupon"
         tools:context="com.bigburger.activity.ProfileActivity">
 
         <ImageView
-            android:id="@+id/mSandwichImage"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:id="@+id/mIngredientImage"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="@dimen/centi_margin"
-            android:layout_marginBottom="@dimen/kilo_margin"
-            android:layout_marginTop="@dimen/kilo_margin"/>
+            android:layout_marginBottom="@dimen/centi_margin"
+            android:layout_marginTop="@dimen/centi_margin"
+            tools:imageUrl="@{ingredient.image}"/>
 
         <com.bigburger.customViews.BigBurgerTextView
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/hecto_text"
-            android:textColor="@color/red"
+            android:textColor="@color/brown"
             app:typefaceOpenSans="@string/bold"
             android:paddingRight="@dimen/centi_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@{sandwich.price}"/>
+            android:textSize="@dimen/centi_text"
+            android:text="@{ingredient.price}"/>
 
-        <LinearLayout
+        <com.bigburger.customViews.BigBurgerTextView
+            android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/hecto_margin"
             android:paddingRight="@dimen/centi_margin"
-            app:layout_constraintStart_toEndOf="@id/mSandwichImage"
+            app:layout_constraintStart_toEndOf="@id/mIngredientImage"
             app:layout_constraintEnd_toStartOf="@id/price"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="vertical">
-
-            <com.bigburger.customViews.BigBurgerTextView
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/deca_text"
-                app:typefaceOpenSans="@string/semibold"
-                android:textColor="@color/brown"
-                android:paddingTop="@dimen/nano_margin"
-                android:text="@{sandwich.name}" />
-
-            <com.bigburger.customViews.BigBurgerTextView
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/micro_text"
-                android:text="@{sandwich.description}"
-                android:paddingBottom="@dimen/centi_margin"/>
-
-        </LinearLayout>
+            android:textSize="@dimen/centi_text"
+            android:text="@{ingredient.name}" />
 
         <View
             android:layout_width="match_parent"

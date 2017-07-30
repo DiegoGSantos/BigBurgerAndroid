@@ -1,20 +1,23 @@
 package com.bigburger.viewmodel;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.BindingAdapter;
+import android.os.Build;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bigburger.model.Ingredient;
+import com.bigburger.model.MySandwich;
 import com.bigburger.model.Sandwich;
-import com.bigburger.restclient.API;
-import com.bigburger.restclient.BigBurgerService;
+import com.bigburger.view.SandwichDetailActivity;
 import com.bumptech.glide.Glide;
-import java.util.List;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by diegosantos on 7/28/17.
@@ -24,10 +27,12 @@ public class ItemSandwichViewModel extends BaseObservable {
 
     Context mContext;
     Sandwich mSandwich;
+    List<Ingredient> mIngredients;
 
-    public ItemSandwichViewModel(Context mContext, Sandwich mSandwich) {
+    public ItemSandwichViewModel(Activity mContext, Sandwich mSandwich, List<Ingredient> ingredients) {
         this.mContext = mContext;
         this.mSandwich = mSandwich;
+        mIngredients = ingredients;
     }
 
     @BindingAdapter("bind:imageUrl") public static void setImageUrl(ImageView imageView, String url) {
@@ -35,7 +40,17 @@ public class ItemSandwichViewModel extends BaseObservable {
     }
 
     public void onItemClick(View view) {
-//        context.startActivity(PeopleDetailActivity.launchDetail(view.getContext(), people));
+
+        MySandwich mySandwich = new MySandwich(mSandwich, mIngredients, new ArrayList<Ingredient>());
+
+        Intent intent = SandwichDetailActivity.getIntent(mContext, mySandwich);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mContext.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(
+                    (Activity) mContext, view, view.getTransitionName()).toBundle());
+        }else{
+            mContext.startActivity(intent);
+        }
     }
 
     public void setSandwich(Sandwich sandwich) {
@@ -57,5 +72,9 @@ public class ItemSandwichViewModel extends BaseObservable {
 
     public String getPrice(){
         return mSandwich.getPrice();
+    }
+
+    public List<Ingredient> getIngredients(){
+        return mIngredients;
     }
 }

@@ -36,4 +36,6 @@
     <dimen name="pico_text">8sp</dimen>
     <dimen name="default_text">@dimen/centi_text</dimen>
 
+    <dimen name="button_corner_radius">3dp</dimen>
+
 </resources>

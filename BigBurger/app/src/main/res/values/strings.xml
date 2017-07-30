@@ -11,4 +11,7 @@
     <string name="server_error_message">Oops alguma coisa deu errado! Verifique sua conexão com a internet.</string>
     <string name="server_error_icon"></string>
     <string name="action_cart">shopping_cart</string>
+    <string name="transition_coupon">transition</string>
+    <string name="add_ingredients">Adicionar Mais Ingredientes</string>
+    <string name="add_to_cart">Adicionar ao Carrinho</string>
 </resources>

@@ -48,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical"
+                app:layoutManager="LinearLayoutManager"
                 app:visibility="@{viewModel.sandwichesListVisibility}"/>
 
             <ProgressBar
@@ -60,25 +61,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/hecto_margin"
-                android:orientation="vertical"
                 app:visibility="@{viewModel.noSandwichesFoundListVisibility}">
 
-                <com.bigburger.customViews.BigBurgerTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/server_error_icon"
-                    android:textSize="130sp"
-                    app:typefaceOpenSans="@string/line_awesome"/>
-
-                <com.bigburger.customViews.BigBurgerTextView
+                <include
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/brown"
-                    android:textSize="@dimen/deci_text"
-                    android:gravity="center"
-                    android:text="@string/server_error_message"/>
+                    layout="@layout/view_no_data_found" />
 
             </LinearLayout>
 

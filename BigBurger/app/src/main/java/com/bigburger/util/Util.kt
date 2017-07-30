@@ -1,4 +1,4 @@
-package com.pharebee.util
+package com.bigburger.util
 
 import android.content.Context
 import android.location.Location

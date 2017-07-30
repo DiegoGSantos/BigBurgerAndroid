@@ -1,5 +1,6 @@
 package com.bigburger.restclient;
 
+import com.bigburger.model.Ingredient;
 import com.bigburger.model.Sandwich;
 
 import java.util.List;
@@ -17,4 +18,7 @@ public interface BigBurgerService {
 
     @GET("lanche")
     Call<List<Sandwich>> list();
+
+    @GET("ingrediente")
+    Call<List<Ingredient>> listIngredients();
 }

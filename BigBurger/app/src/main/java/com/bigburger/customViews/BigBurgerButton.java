@@ -8,7 +8,7 @@ import android.view.View;
 import com.bigburger.R;
 import com.bigburger.util.FontUtils;
 
-import static com.pharebee.util.UtilKt.isStringValid;
+import static com.bigburger.util.UtilKt.isStringValid;
 
 /**
  * Created by diegosantos on 5/30/17.

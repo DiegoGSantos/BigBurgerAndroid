@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context="com.bigburger.view.SandwichDetailActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/AppTheme.ToolBar"
+            android:background="@color/orange">
+
+            <com.bigburger.customViews.BigBurgerTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="@dimen/deci_text"
+                app:typefaceOpenSans="@string/semibold"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:id="@+id/toolbar_title" />
+
+        </android.support.v7.widget.Toolbar>
+
+        <include
+            android:id="@+id/mSandwich"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            layout="@layout/adapter_sandwich"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mIngredientList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:layoutManager="LinearLayoutManager"/>
+
+        <com.bigburger.customViews.BigBurgerButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_rectangular_brown"
+            android:layout_margin="@dimen/hecto_margin"
+            android:textColor="@color/white"
+            android:text="@string/add_ingredients"/>
+
+        <com.bigburger.customViews.BigBurgerButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_rectangular_brown"
+            android:layout_marginBottom="@dimen/hecto_margin"
+            android:layout_marginLeft="@dimen/hecto_margin"
+            android:layout_marginRight="@dimen/hecto_margin"
+            android:textColor="@color/white"
+            android:text="@string/add_to_cart"/>
+
+    </LinearLayout>
+</layout>

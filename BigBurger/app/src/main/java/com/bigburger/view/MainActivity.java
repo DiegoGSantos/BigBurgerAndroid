@@ -12,12 +12,13 @@ import android.view.Menu;
 import com.bigburger.R;
 import com.bigburger.adapter.SandwichAdapter;
 import com.bigburger.databinding.ActivityMainBinding;
+import com.bigburger.model.Ingredient;
 import com.bigburger.model.Sandwich;
 import com.bigburger.viewmodel.SandwichesViewModel;
 
 import java.util.List;
 
-import static com.pharebee.util.UtilKt.isObjectNotNull;
+import static com.bigburger.util.UtilKt.isObjectNotNull;
 
 public class MainActivity extends AppCompatActivity implements SandwichesViewModel.DataListener {
 
@@ -41,11 +42,9 @@ public class MainActivity extends AppCompatActivity implements SandwichesViewMod
     }
 
     @Override
-    public void onDataRequestSuccess(List<Sandwich> sandwiches) {
-        SandwichAdapter adapter = new SandwichAdapter();
-        adapter.setSandwichesList(sandwiches);
+    public void onDataRequestSuccess(List<Sandwich> sandwiches, List<Ingredient> ingredients) {
+        SandwichAdapter adapter = new SandwichAdapter(sandwiches, ingredients);
         binding.mSandwichList.setAdapter(adapter);
-        binding.mSandwichList.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
