@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="typefaceOpenSans" format="string" />
+
+    <declare-styleable name="BigBurgerTextView">
+        <attr name="typefaceOpenSans" />
+    </declare-styleable>
+
+    <declare-styleable name="BigBurgerButton">
+        <attr name="typefaceOpenSans" />
+    </declare-styleable>
+</resources>

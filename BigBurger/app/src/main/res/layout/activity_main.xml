@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.bigburger.viewmodel.SandwichesViewModel"/>
+
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/AppTheme.ToolBar"
+            android:background="@color/orange">
+
+            <com.bigburger.customViews.BigBurgerTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="@dimen/deci_text"
+                app:typefaceOpenSans="@string/semibold"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:id="@+id/toolbar_title" />
+
+        </android.support.v7.widget.Toolbar>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:context="com.bigburger.view.MainActivity"
+            android:background="@color/background">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mSandwichList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                app:visibility="@{viewModel.sandwichesListVisibility}"/>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:layout_gravity="center"
+                app:visibility="@{viewModel.loadingVisibility}"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/hecto_margin"
+                android:orientation="vertical"
+                app:visibility="@{viewModel.noSandwichesFoundListVisibility}">
+
+                <com.bigburger.customViews.BigBurgerTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/server_error_icon"
+                    android:textSize="130sp"
+                    app:typefaceOpenSans="@string/line_awesome"/>
+
+                <com.bigburger.customViews.BigBurgerTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/brown"
+                    android:textSize="@dimen/deci_text"
+                    android:gravity="center"
+                    android:text="@string/server_error_message"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>
+
