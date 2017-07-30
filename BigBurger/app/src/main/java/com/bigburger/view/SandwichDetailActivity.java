@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import com.bigburger.R;
 import com.bigburger.adapter.IngredientsAdapter;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 
 import static com.bigburger.util.ConvertObjectUtils.getMySandwichFromJson;
 import static com.bigburger.util.UtilKt.getStringFromObject;
+import static com.bigburger.util.UtilKt.isObjectNotNull;
 
 public class SandwichDetailActivity extends AppCompatActivity {
 
@@ -39,11 +41,27 @@ public class SandwichDetailActivity extends AppCompatActivity {
         binding.mIngredientList.setAdapter(new IngredientsAdapter(mSandwich.getIngredients()));
 
         binding.toolbarTitle.setText(mSandwich.getSandwich().getName());
+
+        setSupportActionBar(binding.toolBar);
+        if (isObjectNotNull(getSupportActionBar())){
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public static Intent getIntent(Context context, MySandwich mySandwich) {
         Intent starter = new Intent(context, SandwichDetailActivity.class);
         starter.putExtra(MY_SANDWICH_EXTRA, getStringFromObject(mySandwich));
         return starter;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
