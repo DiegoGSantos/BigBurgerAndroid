@@ -20,7 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.SandwichDetailActivity"></activity>
+        <activity
+            android:name=".view.SandwichDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.IngredientsActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".view.OrdersActivity"/>
     </application>
 
 </manifest>

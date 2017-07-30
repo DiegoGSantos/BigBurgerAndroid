@@ -21,7 +21,7 @@ import static com.bigburger.util.UtilKt.isObjectNotNull;
  * Created by diegosantos on 7/30/17.
  */
 
-public class SandwichesViewModel {
+public class SandwichesViewModel implements ViewModel {
 
     public ObservableInt sandwichesListVisibility = new ObservableInt(View.INVISIBLE);
     public ObservableInt noSandwichesFoundListVisibility = new ObservableInt(View.INVISIBLE);
@@ -79,12 +79,18 @@ public class SandwichesViewModel {
         });
     }
 
-    public void onViewDestroy(){
+    @Override
+    public void onViewDestroy() {
+
         if (isObjectNotNull(callSandwiches)){
             callSandwiches.cancel();
+        }
+
+        if (isObjectNotNull(callIngredients)){
             callIngredients.cancel();
         }
     }
+
 
     public interface DataListener{
         void onDataRequestSuccess(List<Sandwich> sandwiches, List<Ingredient> ingredients);

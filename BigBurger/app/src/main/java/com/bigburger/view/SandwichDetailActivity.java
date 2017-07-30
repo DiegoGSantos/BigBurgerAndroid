@@ -6,12 +6,14 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.bigburger.R;
 import com.bigburger.adapter.IngredientsAdapter;
 import com.bigburger.databinding.ActivitySandwichDetailBinding;
 import com.bigburger.model.MySandwich;
 import com.bigburger.viewmodel.ItemSandwichViewModel;
+import com.bigburger.viewmodel.SandwicheDetailViewModel;
 import com.bumptech.glide.Glide;
 
 import static com.bigburger.util.ConvertObjectUtils.getMySandwichFromJson;
@@ -25,6 +27,7 @@ public class SandwichDetailActivity extends AppCompatActivity {
 
     ActivitySandwichDetailBinding binding;
     MySandwich mSandwich;
+    SandwicheDetailViewModel sandwicheDetailViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,27 @@ public class SandwichDetailActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        sandwicheDetailViewModel = new SandwicheDetailViewModel(this, mSandwich.getSandwich());
+        binding.setSandwichDetail(sandwicheDetailViewModel);
+
+        setListeners();
+    }
+
+    private void setListeners() {
+        binding.mAddToCart.setButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sandwicheDetailViewModel.addToCart(v);
+            }
+        });
+
+        binding.mAddIngredients.setButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sandwicheDetailViewModel.addExtraIngredients(v);
+            }
+        });
     }
 
     public static Intent getIntent(Context context, MySandwich mySandwich) {
@@ -63,5 +87,13 @@ public class SandwichDetailActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        sandwicheDetailViewModel.onViewDestroy();
+
+        super.onDestroy();
     }
 }

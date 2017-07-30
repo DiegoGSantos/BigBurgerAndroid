@@ -6,16 +6,12 @@
     <data>
 
         <variable
-            name="sandwich"
-            type="com.bigburger.viewmodel.ItemSandwichViewModel"/>
+            name="order"
+            type="com.bigburger.viewmodel.ItemOrderViewModel"/>
 
     </data>
 
     <android.support.constraint.ConstraintLayout
-        android:onClick="@{sandwich::onItemClick}"
-        android:background="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
         android:id="@+id/clMainLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,20 +30,7 @@
             android:layout_marginLeft="@dimen/centi_margin"
             android:layout_marginBottom="@dimen/kilo_margin"
             android:layout_marginTop="@dimen/kilo_margin"
-            tools:sandwichUrl="@{sandwich.image}"/>
-
-        <com.bigburger.customViews.BigBurgerTextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/hecto_text"
-            android:textColor="@color/red"
-            app:typefaceOpenSans="@string/bold"
-            android:paddingRight="@dimen/centi_margin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@{sandwich.price}"/>
+            tools:sandwichUrl="@{order.image}"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -55,28 +38,31 @@
             android:paddingLeft="@dimen/hecto_margin"
             android:paddingRight="@dimen/centi_margin"
             app:layout_constraintStart_toEndOf="@id/mSandwichImage"
-            app:layout_constraintEnd_toStartOf="@id/price"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:orientation="vertical">
 
             <com.bigburger.customViews.BigBurgerTextView
                 android:id="@+id/name"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
                 android:textSize="@dimen/deca_text"
                 app:typefaceOpenSans="@string/semibold"
                 android:textColor="@color/brown"
-                android:paddingTop="@dimen/nano_margin"
-                android:text="@{sandwich.name}" />
+                android:text="@{order.name}" />
 
             <com.bigburger.customViews.BigBurgerTextView
-                android:id="@+id/description"
-                android:layout_width="match_parent"
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/micro_text"
-                android:text="@{sandwich.description}"
-                android:paddingBottom="@dimen/centi_margin"/>
+                android:textSize="@dimen/deci_text"
+                android:textColor="@color/red"
+                app:typefaceOpenSans="@string/regular"
+                android:paddingRight="@dimen/centi_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@{order.date}"/>
 
         </LinearLayout>
 
@@ -89,5 +75,4 @@
             app:layout_constraintRight_toRightOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>
-
 </layout>

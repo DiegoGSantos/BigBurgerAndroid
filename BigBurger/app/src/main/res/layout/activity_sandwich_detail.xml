@@ -3,7 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="sandwichDetail"
+            type="com.bigburger.viewmodel.SandwicheDetailViewModel"/>
+
+    </data>
+
     <LinearLayout
+        android:clickable="true"
+        android:focusable="true"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -44,14 +54,16 @@
             app:layoutManager="LinearLayoutManager"/>
 
         <com.bigburger.customViews.BigBurgerButton
+            android:id="@+id/mAddIngredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_rectangular_brown"
             android:layout_margin="@dimen/hecto_margin"
             android:textColor="@color/white"
-            android:text="@string/add_ingredients"/>
+            android:text="@string/add_ingredients" />
 
         <com.bigburger.customViews.BigBurgerButton
+            android:id="@+id/mAddToCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_rectangular_brown"
@@ -59,7 +71,7 @@
             android:layout_marginLeft="@dimen/hecto_margin"
             android:layout_marginRight="@dimen/hecto_margin"
             android:textColor="@color/white"
-            android:text="@string/add_to_cart"/>
+            android:text="@string/add_to_cart" />
 
     </LinearLayout>
 </layout>
