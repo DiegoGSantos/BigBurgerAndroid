@@ -133,7 +133,7 @@ public class SandwichDetailActivity extends AppCompatActivity {
                 mSandwich.getSandwich().setPrice(getSandwichPrice(ingredients));
                 mSandwich.getSandwich().setDescription(getSandwichDescription(ingredients));
 
-                mSandwich.getSandwich().setName(mSandwich.getSandwich().getName() + " - Do seu jeito");
+                mSandwich.getSandwich().setName(mSandwich.getSandwich().getName().replace(" - Do seu jeito", "") + " - Do seu jeito");
 
                 itemSandwichViewModel.setSandwich(mSandwich.getSandwich());
                 binding.mSandwich.setSandwich(itemSandwichViewModel);
