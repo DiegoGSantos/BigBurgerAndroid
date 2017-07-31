@@ -32,18 +32,70 @@
             android:layout_marginTop="@dimen/centi_margin"
             tools:imageUrl="@{ingredient.image}"/>
 
-        <com.bigburger.customViews.BigBurgerTextView
-            android:id="@+id/price"
+        <LinearLayout
+            android:id="@+id/llPriceAndQtde"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/brown"
-            app:typefaceOpenSans="@string/bold"
             android:paddingRight="@dimen/centi_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:textSize="@dimen/centi_text"
-            android:text="@{ingredient.price}"/>
+            android:orientation="vertical">
+
+            <com.bigburger.customViews.BigBurgerTextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/brown"
+                android:layout_gravity="center_horizontal"
+                app:typefaceOpenSans="@string/bold"
+                android:textSize="@dimen/centi_text"
+                android:text="@{ingredient.price}"/>
+
+            <LinearLayout
+                android:id="@+id/llQtde"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.bigburger.customViews.BigBurgerTextView
+                    android:id="@+id/decreaseQtde"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="&#xf28f;"
+                    android:textSize="@dimen/kilo_text"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/brown"
+                    app:typefaceOpenSans="@string/line_awesome"/>
+
+                <com.bigburger.customViews.BigBurgerTextView
+                    android:id="@+id/mQtde"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/micro_text"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:layout_margin="@dimen/nano_margin"
+                    android:paddingTop="@dimen/micro_margin"
+                    android:paddingBottom="@dimen/micro_margin"
+                    android:paddingStart="@dimen/mili_margin"
+                    android:paddingEnd="@dimen/mili_margin"
+                    android:background="@drawable/background_rectangular"
+                    android:layout_marginTop="8dp"
+                    android:text="0"/>
+
+                <com.bigburger.customViews.BigBurgerTextView
+                    android:id="@+id/increaseQtde"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="&#xf2c3;"
+                    android:textSize="@dimen/kilo_text"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/brown"
+                    app:typefaceOpenSans="@string/line_awesome"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <com.bigburger.customViews.BigBurgerTextView
             android:id="@+id/name"
@@ -52,7 +104,7 @@
             android:paddingLeft="@dimen/hecto_margin"
             android:paddingRight="@dimen/centi_margin"
             app:layout_constraintStart_toEndOf="@id/mIngredientImage"
-            app:layout_constraintEnd_toStartOf="@id/price"
+            app:layout_constraintEnd_toStartOf="@id/llPriceAndQtde"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:textSize="@dimen/centi_text"

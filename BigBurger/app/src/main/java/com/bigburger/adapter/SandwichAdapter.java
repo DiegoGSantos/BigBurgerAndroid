@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import static com.bigburger.model.SandwichKt.getSandwichDescription;
+import static com.bigburger.model.SandwichKt.getSandwichPrice;
 import static com.bigburger.util.UtilKt.isStringValid;
 
 /**
@@ -56,21 +58,6 @@ public class SandwichAdapter extends RecyclerView.Adapter<SandwichAdapter.Sandwi
         holder.bindSandwich(sandwich, ingredients);
     }
 
-    private String getSandwichDescription(ArrayList<Ingredient> ingredients) {
-        String description = "";
-
-        for (Ingredient ingredient : ingredients){
-
-            if (isStringValid(description)){
-                description += ", ";
-            }
-
-            description += ingredient.getName();
-        }
-
-        return description;
-    }
-
     private ArrayList<Ingredient> getSandwichIngredients(List<Integer> sandwichIngredientsId) {
 
         ArrayList<Ingredient> sandwichIngredients = new ArrayList<>();
@@ -82,20 +69,6 @@ public class SandwichAdapter extends RecyclerView.Adapter<SandwichAdapter.Sandwi
         }
 
         return sandwichIngredients;
-    }
-
-    private String getSandwichPrice(List<Ingredient> ingredients) {
-
-        Double price = 0.0;
-
-        for (Ingredient ingredient : ingredients){
-            price += ingredient.getPrice();
-        }
-
-        final Locale brLocale = new Locale("pt", "BR");
-        NumberFormat in= NumberFormat.getCurrencyInstance(brLocale);
-
-        return in.format(price);
     }
 
     @Override

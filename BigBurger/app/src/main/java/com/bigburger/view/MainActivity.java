@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.bigburger.R;
 import com.bigburger.adapter.SandwichAdapter;
@@ -61,5 +62,15 @@ public class MainActivity extends AppCompatActivity implements SandwichesViewMod
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.action_cart) {
+            OrdersActivity.start(this);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

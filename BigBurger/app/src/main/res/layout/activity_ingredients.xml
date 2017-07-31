@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/background"
         tools:context="com.bigburger.view.IngredientsActivity">
 
         <android.support.v7.widget.Toolbar
@@ -41,8 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            tools:context="com.bigburger.view.MainActivity"
-            android:background="@color/background">
+            tools:context="com.bigburger.view.MainActivity">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/mIngredientList"
@@ -72,6 +72,15 @@
             </LinearLayout>
 
         </FrameLayout>
+
+        <com.bigburger.customViews.BigBurgerButton
+            android:id="@+id/mAddIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_rectangular_brown"
+            android:layout_margin="@dimen/hecto_margin"
+            android:textColor="@color/white"
+            android:text="@string/update_ingredients" />
 
     </LinearLayout>
 

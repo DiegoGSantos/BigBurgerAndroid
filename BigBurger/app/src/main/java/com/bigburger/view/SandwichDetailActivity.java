@@ -11,14 +11,25 @@ import android.view.View;
 import com.bigburger.R;
 import com.bigburger.adapter.IngredientsAdapter;
 import com.bigburger.databinding.ActivitySandwichDetailBinding;
+import com.bigburger.model.Ingredient;
 import com.bigburger.model.MySandwich;
+import com.bigburger.restclient.parameter.CustomOrderIngredients;
+import com.bigburger.restclient.parameter.CustomOrderParameter;
 import com.bigburger.viewmodel.ItemSandwichViewModel;
 import com.bigburger.viewmodel.SandwicheDetailViewModel;
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.bigburger.model.SandwichKt.getSandwichDescription;
+import static com.bigburger.model.SandwichKt.getSandwichPrice;
+import static com.bigburger.util.ConvertObjectUtils.getCustomOrderFromJson;
+import static com.bigburger.util.ConvertObjectUtils.getCustomOrderIngredientsFromJson;
 import static com.bigburger.util.ConvertObjectUtils.getMySandwichFromJson;
 import static com.bigburger.util.UtilKt.getStringFromObject;
 import static com.bigburger.util.UtilKt.isObjectNotNull;
+import static com.bigburger.view.IngredientsActivity.EXTRA_INGREDIENTS;
 
 public class SandwichDetailActivity extends AppCompatActivity {
 
@@ -28,6 +39,9 @@ public class SandwichDetailActivity extends AppCompatActivity {
     ActivitySandwichDetailBinding binding;
     MySandwich mSandwich;
     SandwicheDetailViewModel sandwicheDetailViewModel;
+    CustomOrderParameter customOrderParameter;
+    ItemSandwichViewModel itemSandwichViewModel;
+    IngredientsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +51,12 @@ public class SandwichDetailActivity extends AppCompatActivity {
 
         mSandwich = getMySandwichFromJson(getIntent().getStringExtra(MY_SANDWICH_EXTRA));
 
-        ItemSandwichViewModel itemSandwichViewModel = new ItemSandwichViewModel(this, mSandwich.getSandwich(), mSandwich.getIngredients());
+        itemSandwichViewModel = new ItemSandwichViewModel(this, mSandwich.getSandwich(), mSandwich.getIngredients());
 
         binding.mSandwich.setSandwich(itemSandwichViewModel);
 
-        binding.mIngredientList.setAdapter(new IngredientsAdapter(mSandwich.getIngredients()));
+        adapter = new IngredientsAdapter(mSandwich.getIngredients(), false);
+        binding.mIngredientList.setAdapter(adapter);
 
         binding.toolbarTitle.setText(mSandwich.getSandwich().getName());
 
@@ -61,7 +76,7 @@ public class SandwichDetailActivity extends AppCompatActivity {
         binding.mAddToCart.setButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sandwicheDetailViewModel.addToCart(v);
+                sandwicheDetailViewModel.addToCart(v, customOrderParameter);
             }
         });
 
@@ -95,5 +110,45 @@ public class SandwichDetailActivity extends AppCompatActivity {
         sandwicheDetailViewModel.onViewDestroy();
 
         super.onDestroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK){
+            if (isObjectNotNull(data) && data.hasExtra(EXTRA_INGREDIENTS)){
+                String customOrderParameterJson = data.getStringExtra(EXTRA_INGREDIENTS);
+                CustomOrderIngredients customOrderIngredients = getCustomOrderIngredientsFromJson(customOrderParameterJson);
+
+                List<Ingredient> extraIngredients = mSandwich.getExtraIngredients();
+                extraIngredients.addAll(customOrderIngredients.getExtras());
+
+                mSandwich.setExtraIngredients(extraIngredients);
+
+                List<Ingredient> ingredients = new ArrayList<>();
+                ingredients.addAll(mSandwich.getIngredients());
+                ingredients.addAll(mSandwich.getExtraIngredients());
+
+                mSandwich.getSandwich().setPrice(getSandwichPrice(ingredients));
+                mSandwich.getSandwich().setDescription(getSandwichDescription(ingredients));
+
+                mSandwich.getSandwich().setName(mSandwich.getSandwich().getName() + " - Do seu jeito");
+
+                itemSandwichViewModel.setSandwich(mSandwich.getSandwich());
+                binding.mSandwich.setSandwich(itemSandwichViewModel);
+
+                adapter.setIngredientes(ingredients, false);
+                binding.mIngredientList.setAdapter(adapter);
+
+                List<Integer> extras = new ArrayList<Integer>();
+
+                for (Ingredient ingredient : mSandwich.getExtraIngredients()){
+                    extras.add(ingredient.getId());
+                }
+
+                customOrderParameter = new CustomOrderParameter(extras);
+            }
+        }
     }
 }
